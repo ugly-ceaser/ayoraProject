@@ -13,6 +13,7 @@ class Account {
     }
 
     private async startSync(daysWithin: number): Promise<SyncResponse> {
+        console.log('start sync');
         const response = await axios.post<SyncResponse>(
             `${API_BASE_URL}/email/sync`,
             {},

@@ -9,7 +9,7 @@
     "db:migrate": "prisma migrate deploy",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
-     "dev": "next dev --turbo --port 3000 | node -e \"require('readline').createInterface({ input: process.stdin }).on('line', line => { if (!/^\\s?(GET|POST|OPTIONS)/.test(line)) console.log(line); })\"",
+    "dev": "next dev --turbo --port 3000 | node -e \"require('readline').createInterface({ input: process.stdin }).on('line', line => { if (!/^\\s?(GET|POST|OPTIONS)/.test(line)) console.log(line); })\"",
     "postinstall": "prisma generate",
     "lint": "next lint",
     "start": "next start"
@@ -83,6 +83,7 @@
     "next-themes": "^0.3.0",
     "novel": "^0.5.0",
     "nylas": "^7.5.2",
+    "openai": "^4.79.1",
     "openai-edge": "^1.2.2",
     "oslo": "^1.2.1",
     "p-limit": "^6.1.0",

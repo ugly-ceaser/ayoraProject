@@ -23,6 +23,7 @@ model User {
     role Role @default(user)
 
     accounts Account[]
+    grants  Grant[]
 
     chatbotInteraction ChatbotInteraction?
 }
@@ -194,4 +195,13 @@ enum MeetingMessageMethod {
     cancel
     counter
     other
+}
+
+model Grant {
+    id      String   @id
+    token   String
+    userId  String
+    user    User     @relation(fields: [userId], references: [id])
+
+    @@map("grants")
 }

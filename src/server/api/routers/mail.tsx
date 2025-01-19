@@ -9,6 +9,9 @@ import { emailAddressSchema } from "@/lib/types";
 import { FREE_CREDITS_PER_DAY } from "@/app/constants";
 
 export const authoriseAccountAccess = async (accountId: string, userId: string) => {
+
+    
+    
     const account = await db.account.findFirst({
         where: {
             id: accountId,
@@ -18,7 +21,7 @@ export const authoriseAccountAccess = async (accountId: string, userId: string) 
             id: true, emailAddress: true, name: true, token: true
         }
     })
-    if (!account) throw new Error("Invalid token")
+    if (!account) throw new Error("Invalid token 1")
     return account
 }
 

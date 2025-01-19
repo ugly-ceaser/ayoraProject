@@ -18,32 +18,44 @@ const openai = new OpenAIApi(config);
 export async function POST(req: Request) {
     try {
         const { userId } = await auth()
+
+       
+
+      
+
+        
         if (!userId) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
-        const isSubscribed = await getSubscriptionStatus()
-        if (!isSubscribed) {
-            const chatbotInteraction = await db.chatbotInteraction.findUnique({
-                where: {
-                    day: new Date().toDateString(),
-                    userId
-                }
-            })
-            if (!chatbotInteraction) {
-                await db.chatbotInteraction.create({
-                    data: {
-                        day: new Date().toDateString(),
-                        count: 1,
-                        userId
-                    }
-                })
-            } else if (chatbotInteraction.count >= FREE_CREDITS_PER_DAY) {
-                return NextResponse.json({ error: "Limit reached" }, { status: 429 });
-            }
-        }
+        // const isSubscribed = await getSubscriptionStatus()
+        // if (!isSubscribed) {
+        //     const chatbotInteraction = await db.chatbotInteraction.findUnique({
+        //         where: {
+        //             day: new Date().toDateString(),
+        //             userId
+        //         }
+        //     })
+        //     if (!chatbotInteraction) {
+        //         await db.chatbotInteraction.create({
+        //             data: {
+        //                 day: new Date().toDateString(),
+        //                 count: 1,
+        //                 userId
+        //             }
+        //         })
+        //     } else if (chatbotInteraction.count >= FREE_CREDITS_PER_DAY) {
+        //         return NextResponse.json({ error: "Limit reached" }, { status: 429 });
+        //     }
+        // }
         const { messages, accountId } = await req.json();
+
+       
+        console.log('account id',  userId)
+
         const oramaManager = new OramaManager(accountId)
         await oramaManager.initialize()
+
+        console.log('messages: ', messages)
 
         const lastMessage = messages[messages.length - 1]
 

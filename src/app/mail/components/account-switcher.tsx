@@ -14,6 +14,7 @@ import { api, type RouterOutputs } from "@/trpc/react"
 import { useLocalStorage } from "usehooks-ts"
 import { Plus } from "lucide-react"
 import { getAurinkoAuthorizationUrl } from "@/lib/aurinko"
+import {getNylasAuthorizationUrl} from "@/lib/nylas"
 import { toast } from "sonner"
 
 interface AccountSwitcherProps {
@@ -36,7 +37,13 @@ export function AccountSwitcher({
           label: 'Add account',
           onClick: async () => {
             try {
-              const url = await getAurinkoAuthorizationUrl('Google')
+
+              console.log('button clicked')
+              //const url = await getAurinkoAuthorizationUrl('Google')
+              const url = await getNylasAuthorizationUrl()
+
+              console.log('url from frontend: ', url)
+
               window.location.href = url
             } catch (error) {
               toast.error((error as Error).message)
