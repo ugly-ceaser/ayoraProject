@@ -68,7 +68,7 @@ export async function GET(request: NextRequest) {
           data: {
             accountId: grantId,
             subject: email.subject as string,
-            lastMessageDate: new Date(email.date)
+            lastMessageDate: new Date(email.date * 1000)
           }
         })
 
@@ -95,16 +95,16 @@ export async function GET(request: NextRequest) {
         await db.email.create({
           data: {
             threadId: thread.id,
-            sentAt: new Date(email.date),
-            createdTime: new Date(email.date),
-            receivedAt: new Date(email.date),
+            sentAt: new Date(email.date * 1000),
+            createdTime: new Date(email.date * 1000),
+            receivedAt: new Date(email.date * 1000),
             body: email.body as string,
             bodySnippet: email.snippet as string,
             fromId: from.id,
             hasAttachments: !!email?.attachments?.length,
             subject: email.subject as string,
             internetMessageId: email.id,
-            lastModifiedTime: new Date(email.date),
+            lastModifiedTime: new Date(email.date * 1000),
           }
         })
       }
